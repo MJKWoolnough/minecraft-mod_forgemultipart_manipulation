@@ -8,9 +8,9 @@ import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.nbt.NBTTagShort;
 
 public class DefaultFMPManipulators {
-	
+
 	public abstract static class Multipart implements IMultiPartManipulator {
-		
+
 		protected final long getNumber(String tagName, NBTTagCompound data) {
 			NBTBase tag = data.getTag(tagName);
 			if (tag != null) {
@@ -27,7 +27,7 @@ public class DefaultFMPManipulators {
 			}
 			return 0;
 		}
-		
+
 		protected final void setNumber(String tagName, long number, NBTTagCompound data) {
 			switch (data.getTag(tagName).getId()) {
 			case 1:
@@ -50,23 +50,23 @@ public class DefaultFMPManipulators {
 			}
 		}
 	}
-	
+
 	public static class Face extends Multipart {
 
-		protected static final byte BOTTOM = 0;
-		protected static final byte TOP = 1;
-		protected static final byte NORTH = 2;
-		protected static final byte SOUTH = 3;
-		protected static final byte WEST = 4;
-		protected static final byte EAST = 5;
-		
-		protected String tagName = "shape";
-		
+		protected static final byte	BOTTOM	= 0;
+		protected static final byte	TOP	= 1;
+		protected static final byte	NORTH	= 2;
+		protected static final byte	SOUTH	= 3;
+		protected static final byte	WEST	= 4;
+		protected static final byte	EAST	= 5;
+
+		protected String		tagName	= "shape";
+
 		@Override
 		public void rotate90(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~7);
-			switch ((byte)(number & 7)) {
+			switch ((byte) (number & 7)) {
 			case NORTH:
 				this.setNumber(this.tagName, rest | EAST, data);
 				break;
@@ -86,7 +86,7 @@ public class DefaultFMPManipulators {
 		public void rotate180(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~7);
-			switch ((byte)(number & 7)) {
+			switch ((byte) (number & 7)) {
 			case NORTH:
 				this.setNumber(this.tagName, rest | SOUTH, data);
 				break;
@@ -106,7 +106,7 @@ public class DefaultFMPManipulators {
 		public void rotate270(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~7);
-			switch ((byte)(number & 7)) {
+			switch ((byte) (number & 7)) {
 			case NORTH:
 				this.setNumber(this.tagName, rest | WEST, data);
 				break;
@@ -126,7 +126,7 @@ public class DefaultFMPManipulators {
 		public void mirrorX(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~7);
-			switch ((byte)(number & 7)) {
+			switch ((byte) (number & 7)) {
 			case WEST:
 				this.setNumber(this.tagName, rest | EAST, data);
 				break;
@@ -139,8 +139,8 @@ public class DefaultFMPManipulators {
 		@Override
 		public void mirrorZ(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
-			long rest =  number & (~7);
-			switch ((byte)(number & 7)) {
+			long rest = number & (~7);
+			switch ((byte) (number & 7)) {
 			case NORTH:
 				this.setNumber(this.tagName, rest | SOUTH, data);
 				break;
@@ -150,20 +150,20 @@ public class DefaultFMPManipulators {
 			}
 		}
 	}
-	
+
 	public static class Post extends Multipart {
-		
-		private static final byte UD = 0;
-		private static final byte NS = 1;
-		private static final byte WE = 2;
-		
-		protected String tagName = "shape";
+
+		private static final byte	UD	= 0;
+		private static final byte	NS	= 1;
+		private static final byte	WE	= 2;
+
+		protected String		tagName	= "shape";
 
 		@Override
 		public void rotate90(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~3);
-			switch ((byte)(number & 3)) {
+			switch ((byte) (number & 3)) {
 			case NS:
 				this.setNumber(this.tagName, rest | WE, data);
 				break;
@@ -174,7 +174,8 @@ public class DefaultFMPManipulators {
 		}
 
 		@Override
-		public void rotate180(NBTTagCompound data) {}
+		public void rotate180(NBTTagCompound data) {
+		}
 
 		@Override
 		public void rotate270(NBTTagCompound data) {
@@ -182,35 +183,37 @@ public class DefaultFMPManipulators {
 		}
 
 		@Override
-		public void mirrorX(NBTTagCompound data) {}
+		public void mirrorX(NBTTagCompound data) {
+		}
 
 		@Override
-		public void mirrorZ(NBTTagCompound data) {}
-		
+		public void mirrorZ(NBTTagCompound data) {
+		}
+
 	}
-	
+
 	public static class Edge extends Multipart {
-		
-		private static final byte Y_NW = 0;
-		private static final byte Y_SW = 1;
-		private static final byte Y_NE = 2;
-		private static final byte Y_SE = 3;
-		private static final byte Z_DW = 4;
-		private static final byte Z_DE = 5;
-		private static final byte Z_UW = 6;
-		private static final byte Z_UE = 7;
-		private static final byte X_DN = 8;
-		private static final byte X_UN = 9;
-		private static final byte X_DS = 10;
-		private static final byte X_US = 11;
-		
-		protected String tagName = "shape";
+
+		private static final byte	Y_NW	= 0;
+		private static final byte	Y_SW	= 1;
+		private static final byte	Y_NE	= 2;
+		private static final byte	Y_SE	= 3;
+		private static final byte	Z_DW	= 4;
+		private static final byte	Z_DE	= 5;
+		private static final byte	Z_UW	= 6;
+		private static final byte	Z_UE	= 7;
+		private static final byte	X_DN	= 8;
+		private static final byte	X_UN	= 9;
+		private static final byte	X_DS	= 10;
+		private static final byte	X_US	= 11;
+
+		protected String		tagName	= "shape";
 
 		@Override
 		public void rotate90(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~15);
-			switch ((byte)(number & 15)) {
+			switch ((byte) (number & 15)) {
 			case Y_NW:
 				this.setNumber(this.tagName, rest | Y_NE, data);
 				break;
@@ -254,7 +257,7 @@ public class DefaultFMPManipulators {
 		public void rotate180(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~15);
-			switch ((byte)(number & 15)) {
+			switch ((byte) (number & 15)) {
 			case Y_NW:
 				this.setNumber(this.tagName, rest | Y_SE, data);
 				break;
@@ -298,7 +301,7 @@ public class DefaultFMPManipulators {
 		public void rotate270(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~15);
-			switch ((byte)(number & 15)) {
+			switch ((byte) (number & 15)) {
 			case Y_NW:
 				this.setNumber(this.tagName, rest | Y_SW, data);
 				break;
@@ -342,7 +345,7 @@ public class DefaultFMPManipulators {
 		public void mirrorX(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~15);
-			switch ((byte)(number & 15)) {
+			switch ((byte) (number & 15)) {
 			case Y_NW:
 				this.setNumber(this.tagName, rest | Y_NE, data);
 				break;
@@ -374,7 +377,7 @@ public class DefaultFMPManipulators {
 		public void mirrorZ(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~15);
-			switch ((byte)(number & 15)) {
+			switch ((byte) (number & 15)) {
 			case Y_NW:
 				this.setNumber(this.tagName, rest | Y_SW, data);
 				break;
@@ -402,23 +405,23 @@ public class DefaultFMPManipulators {
 			}
 		}
 	}
-	
+
 	public static class Corner extends Multipart {
-		
-		//bit 0x1 - 0 = down, 1 = up
-		
-		private static final byte NW = 0;
-		private static final byte SW = 2;
-		private static final byte NE = 4;
-		private static final byte SE = 6;
-		
-		protected String tagName = "shape";
+
+		// bit 0x1 - 0 = down, 1 = up
+
+		private static final byte	NW	= 0;
+		private static final byte	SW	= 2;
+		private static final byte	NE	= 4;
+		private static final byte	SE	= 6;
+
+		protected String		tagName	= "shape";
 
 		@Override
 		public void rotate90(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~6);
-			switch ((byte)(number & 6)) {
+			switch ((byte) (number & 6)) {
 			case NW:
 				this.setNumber(this.tagName, rest | NE, data);
 				break;
@@ -438,7 +441,7 @@ public class DefaultFMPManipulators {
 		public void rotate180(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~6);
-			switch ((byte)(number & 6)) {
+			switch ((byte) (number & 6)) {
 			case NW:
 				this.setNumber(this.tagName, rest | SE, data);
 				break;
@@ -458,7 +461,7 @@ public class DefaultFMPManipulators {
 		public void rotate270(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~6);
-			switch ((byte)(number & 6)) {
+			switch ((byte) (number & 6)) {
 			case NW:
 				this.setNumber(this.tagName, rest | SW, data);
 				break;
@@ -478,7 +481,7 @@ public class DefaultFMPManipulators {
 		public void mirrorX(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~6);
-			switch ((byte)(number & 6)) {
+			switch ((byte) (number & 6)) {
 			case NW:
 				this.setNumber(this.tagName, rest | NE, data);
 				break;
@@ -498,7 +501,7 @@ public class DefaultFMPManipulators {
 		public void mirrorZ(NBTTagCompound data) {
 			long number = this.getNumber(this.tagName, data);
 			long rest = number & (~6);
-			switch ((byte)(number & 6)) {
+			switch ((byte) (number & 6)) {
 			case NW:
 				this.setNumber(this.tagName, rest | SW, data);
 				break;
@@ -514,16 +517,16 @@ public class DefaultFMPManipulators {
 			}
 		}
 	}
-	
+
 	protected static void registerFMPManipulators() {
 		Face face = new Face();
 		ForgeMultiPartManipulator.registerMultiPartManipulator("mcr_face", face);
 		ForgeMultiPartManipulator.registerMultiPartManipulator("mcr_hllw", face);
-		
+
 		ForgeMultiPartManipulator.registerMultiPartManipulator("mcr_post", new Post());
-		
+
 		ForgeMultiPartManipulator.registerMultiPartManipulator("mcr_edge", new Edge());
-		
+
 		ForgeMultiPartManipulator.registerMultiPartManipulator("mcr_cnr", new Corner());
 	}
 }

@@ -10,13 +10,13 @@ import net.minecraft.nbt.NBTTagList;
 
 public class ForgeMultiPartManipulator implements IBlockManipulator {
 
-	private static final Map<String, IMultiPartManipulator> manipulators = new HashMap<String, IMultiPartManipulator>();
-	private static final int R90 = 0;
-	private static final int R180 = 1;
-	private static final int R270 = 2;
-	private static final int MX = 3;
-	private static final int MZ = 4;
-	
+	private static final Map<String, IMultiPartManipulator>	manipulators	= new HashMap<String, IMultiPartManipulator>();
+	private static final int				R90		= 0;
+	private static final int				R180		= 1;
+	private static final int				R270		= 2;
+	private static final int				MX		= 3;
+	private static final int				MZ		= 4;
+
 	public static final boolean registerMultiPartManipulator(String id, IMultiPartManipulator manipulator) {
 		if (manipulators.containsKey(id)) {
 			return false;
@@ -24,7 +24,7 @@ public class ForgeMultiPartManipulator implements IBlockManipulator {
 		manipulators.put(id, manipulator);
 		return true;
 	}
-	
+
 	private Blocks manipulate(Blocks block, int mode) {
 		NBTTagList parts = block.nbtData.getTagList("parts");
 		for (int i = 0; i < parts.tagCount(); i++) {
@@ -52,7 +52,7 @@ public class ForgeMultiPartManipulator implements IBlockManipulator {
 		}
 		return block;
 	}
-	
+
 	@Override
 	public Blocks rotate90(Blocks block) {
 		return this.manipulate(block, R90);
@@ -77,7 +77,7 @@ public class ForgeMultiPartManipulator implements IBlockManipulator {
 	public Blocks mirrorZ(Blocks block) {
 		return this.manipulate(block, MZ);
 	}
-	
+
 	static {
 		DefaultFMPManipulators.registerFMPManipulators();
 	}

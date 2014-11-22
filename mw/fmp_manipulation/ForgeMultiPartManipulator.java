@@ -3,11 +3,10 @@ package mw.fmp_manipulation;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-
 import mw.library.Blocks;
 import mw.library.IBlockManipulator;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 
 public class ForgeMultiPartManipulator implements IBlockManipulator {
 
